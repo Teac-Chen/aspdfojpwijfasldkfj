@@ -1,0 +1,236 @@
+// ================= 变量 =================
+$Green: #19aa8d;
+$GreenButton: #1ab394;;
+$GreenHover: #18a689;
+$Gray: #eee;
+$White: #fff;
+$Blue: #409EFF;
+$TableColor: #148E75;
+$ElTableBgColor:#23272D;
+$ElTableColor:#FEFEFE;
+$ElTableBorColor:#23272D;
+
+$ElTableThColor:#A9A9AA;
+$ElTableTrBgColor:#2B323B;
+
+$ElPageBgColor: #23272D;
+$ElPageLiColor: #CDD0D0;
+$ElPageLiColor_active: #349BE3;
+
+$ElDialogHeadBgColor: #3C4D5C;
+
+$ElPanelBgColor: #505A66;
+$ElPanelBorderColor: #546476;
+
+
+// ================= SiderBar =================
+.el-menu {
+  background-color: $White;
+  border-right: none;
+}
+.el-submenu .el-menu-item:hover,
+.el-submenu .el-menu-item:focus,
+.el-submenu__title:hover {
+  background-color: $Gray;
+}
+
+.el-menu-item,
+.el-submenu__title {
+  height: 46px;
+  line-height: 46px;
+}
+
+.el-submenu {
+  &.is-opened{
+    border-left: 4px solid $Green;
+    background-color: $Gray;
+  }
+  .el-menu {
+    background-color: $Gray;
+  }
+}
+.dropdown-trigger {
+  color: #999;
+  display: inline-block;
+}
+.el-dropdown-menu {
+  padding: 5px 6px;
+
+  .el-dropdown-menu__item {
+    font-size: 12px;
+    border-radius: 4px;
+    &:hover {
+      background-color: $Gray;
+    }
+
+    & + .el-dropdown-menu__item {
+      margin-top: 5px;
+    }
+  }
+}
+
+// ================= Form =================
+.search-form {
+  color: #676a6c;
+  padding: 5px;
+  background-color: #f5f5f5;
+
+  .el-form-item {
+    margin-bottom: 5px;
+  }
+
+  .el-form-item__label {
+    font-size: 13px;
+    padding-right: 0;
+    font-weight: 400;
+  }
+
+  .el-input {
+    max-width: 160px;
+  }
+
+  .el-date-editor.el-input {
+    width: 100%;
+  }
+
+  .el-button--small,
+  .el-button--small.is-round {
+    padding: 9px 10px;
+  }
+
+  .el-collapse {
+    border: none;
+  }
+
+  .el-collapse-item {
+    div[role=tab] {
+      display: none;
+    }
+
+    div[role=tabpanel] {
+      border-bottom: none;
+      background-color: transparent;
+
+      .el-collapse-item__content {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .el-select .el-select__tags {
+    height: 26px;
+  }
+
+  .search-pannel {
+    padding: 5px 20px 0 5px;
+    border: 1px solid #d3d3d4;
+    margin-bottom: 5px;
+  }
+}
+
+.tool-bar {
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+
+  .el-button--mini,
+  .el-button--mini.is-round {
+    padding: 7px 10px;
+  }
+}
+
+.table-list.el-table:before {
+  background-color: #fff;
+}
+.table-list-header {
+  th {
+    padding: 3px 0;
+    background-color: #ccc;
+    color: $TableColor;
+    border-bottom: 1px solid #fff;
+    & + th {
+      border-left: 1px solid #fff;
+    }
+
+    .caret-wrapper {
+      height: 23px;
+    }
+
+    &.ascending {
+      .sort-caret.ascending {
+        border-bottom-color: $TableColor;
+      }
+      .sort-caret.descending {
+        border-top-color: transparent;
+      }
+    }
+
+    &.descending {
+      .sort-caret.ascending {
+        border-bottom-color: transparent;
+      }
+      .sort-caret.descending {
+        border-top-color: $TableColor;
+      }
+    }
+
+    .sort-caret.ascending {
+      border-bottom-color: $TableColor;
+      top: 0;
+    }
+    .sort-caret.descending {
+      border-top-color: $TableColor;
+      bottom: 0;
+    }
+  }
+}
+.el-table--striped .el-table__body tr.el-table__row--striped.table-list-body {
+  td {
+    background-color: #f2f2f2;
+  }
+  &:hover td {
+    background-color: #f5f7fa;
+  }
+}
+.table-list-body {
+  td {
+    padding: 5px 0;
+    border-bottom: 1px solid #fff;
+    background-color: #E5E5E5;
+
+    & + td {
+      border-left: 1px solid #fff;
+    }
+  }
+}
+
+.tree-input .is-focus .el-input__inner {
+  border-color: $Blue;
+}
+.v-tree {
+  color: #606266;
+  padding: 10px;
+}
+
+// ================= Button =================
+.el-button--green {
+  color: $White;
+  background-color: $GreenButton;
+  border-color: $GreenButton;
+
+  &:active {
+    outline: 0;
+  }
+
+  &.is-active,
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: $GreenHover;
+    border-color: $GreenHover;
+    color: $White;
+  }
+}
