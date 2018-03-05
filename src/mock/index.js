@@ -15,5 +15,8 @@ Mock.mock(/\/index\/chartData/, 'get', HomeAPI.getChartData);
 // 航班查询
 Mock.mock(/\/flightSearch\/mounted/, 'get', FlightSearchAPI.getMounted);
 Mock.mock(/\/flightSearch\/searchName/, 'get', FlightSearchAPI.getPilotName);
+Mock.mock(/\/flightSearch\/getList/, 'get', FlightSearchAPI.getList);
+Mock.mock(/\/flightSearch\/getByService/, 'get', FlightSearchAPI.getListService);
+Mock.mock(/\/flightSearch\/getFlight/, 'get', FlightSearchAPI.getFlight);
 
 export default Mock;

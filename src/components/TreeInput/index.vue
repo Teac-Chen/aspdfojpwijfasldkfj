@@ -70,8 +70,8 @@ export default {
       inputWidth: 0,
       timeout: null,
       inputHovering: false,
+      rootName: '',
       selectLabel: '',
-      rootName: ''
     }
   },
   watch: {
@@ -96,6 +96,16 @@ export default {
     },
     data() {
       this.selectLabel = this.rootName = this.nodeName;
+    },
+    value(v) {
+      this.allNodes.some(node => {
+        if (node.value === this.value){
+          this.selectLabel = node.name;
+
+          return true;
+        }
+        return false;
+      });
     }
   },
   computed: {
@@ -127,8 +137,6 @@ export default {
         this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
       }
     });
-  },
-  beforeDestroy(){
   },
   methods: {
     handleFocus(){

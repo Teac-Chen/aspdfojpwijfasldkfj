@@ -1,5 +1,43 @@
 import Mock from 'mockjs';
 import { param2Obj } from 'utils';
+import sort from 'components/TablePagination/sort';
+
+let now = Date.now();
+
+const list = Array(1000).fill('').map(() => {
+  const left = Mock.mock({
+    cName: '@cname',
+    jCode: Mock.mock(/A\d{5}/),
+    pCode: Mock.mock(/\d{8}/),
+    'teacNo|1': ['F1', 'F2', 'F3', 'F4', 'FL', 'FR', '正驾驶', '机长二阶段', '新机长(一阶段)', '机长', '教员', 'F0'],
+    'org|1': ['A17', 'A12', 'A16', 'A13', 'A14', 'A15', 'AF', 'A11', 'AJ', 'AN', 'AW', 'BX', 'BC', 'B15', 'B16', 'B11', 'B12', 'B13', 'B14', 'BF', 'BG', 'B33', 'BS'],
+    mobilNo: Mock.mock(/^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/)
+  });
+  const right = Mock.mock({
+    cName: '@cname',
+    jCode: Mock.mock(/A\d{5}/),
+    pCode: Mock.mock(/\d{8}/),
+    'teacNo|1': ['F1', 'F2', 'F3', 'F4', 'FL', 'FR', '正驾驶', '机长二阶段', '新机长(一阶段)', '机长', '教员', 'F0'],
+    'org|1': ['A17', 'A12', 'A16', 'A13', 'A14', 'A15', 'AF', 'A11', 'AJ', 'AN', 'AW', 'BX', 'BC', 'B15', 'B16', 'B11', 'B12', 'B13', 'B14', 'BF', 'BG', 'B33', 'BS'],
+    mobilNo: Mock.mock(/^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/)
+  });
+  const item = Mock.mock({
+    id: Mock.Random.id(),
+    timestamp: (now - Mock.Random.integer(1000, (24 * 60 *60 * 1000))),
+    flNum: Mock.mock(/A\d{4}/),
+    acrNumber: Mock.mock(/B\d{4}/),
+    aptArrCn: '@city()',
+    aptDepCn: '@city()',
+    pilotLeft: left,
+    pilotRight: right,
+    'pilotOperator|1': [left, right],
+    'pilotDuty|1': [left, right],
+  });
+
+  now = item.timestamp;
+
+  return item;
+});
 
 function mountedData(){
   const data = {
@@ -152,7 +190,7 @@ function mountedData(){
   }, []);
 
   return data;
-}
+};
 
 function filterName(req){
   const name = param2Obj(req.url).name;
@@ -177,6 +215,42 @@ function filterName(req){
   }
 
   return data;
+};
+
+function filterList(req) {
+  const search = param2Obj(req.url);
+  const begin = new Date(search.beginDate);
+  const end = new Date(search.endDate);
+  return list.filter(item => {
+    return (item.timestamp >= begin.getTime() && item.timestamp <= end.getTime());
+  });
+};
+
+function filterListService(req) {
+  const {pageNo, pageSize, orderBy} = param2Obj(req.url);
+  const from = (pageNo - 1) * pageSize;
+  let orderList = list;
+
+  if (orderBy !== '') {
+    const [prop, order] = orderBy.split(' ');
+    const sortBy = prop === 'timestamp' ? 'int' : 'string';
+    orderList = sort(list, {sortBy, order: order + 'ending', prop})
+  }
+
+  const showList = orderList.slice(from, from + (pageSize - 0));
+
+  return {
+    list: showList,
+    total: list.length,
+    pageNo,
+    pageSize,
+    orderBy
+  };
+}
+
+function flightSearch(req) {
+  const { id } = param2Obj(req.url);
+  return list.filter(item => item.id === id)[0];
 }
 
 export default {
@@ -187,5 +261,21 @@ export default {
   getPilotName: (req) => ({
     code: 0,
     data: filterName(req)
+  }),
+  getList: (req) => ({
+    code: 0,
+    data: filterList(req),
+    msg: 'success',
+    total: list.length
+  }),
+  getListService: (req) => ({
+    code: 0,
+    data: filterListService(req),
+    msg: 'success'
+  }),
+  getFlight: (req) => ({
+    code: 0,
+    data: flightSearch(req),
+    msg: 'success'
   })
-}
+};

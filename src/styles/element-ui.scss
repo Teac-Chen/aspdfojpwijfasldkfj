@@ -187,12 +187,19 @@ $ElPanelBorderColor: #546476;
     }
   }
 }
+.el-table--striped .el-table__body tr.el-table__row--striped.table-list-body,
+.el-table--striped .el-table__body tr.table-list-body, {
+  &:hover td {
+    background-color: #dff0d8;
+  }
+  &.current-row td {
+    background-color: #dff0d8;
+    font-weight: bold;
+  }
+}
 .el-table--striped .el-table__body tr.el-table__row--striped.table-list-body {
   td {
     background-color: #f2f2f2;
-  }
-  &:hover td {
-    background-color: #f5f7fa;
   }
 }
 .table-list-body {

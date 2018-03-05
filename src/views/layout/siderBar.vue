@@ -38,7 +38,7 @@
     },
     watch: {
       collapse(val){
-        this.containerClass = val ? 
+        this.containerClass = val ?
           'siderbar-container is-collapse' :
           'siderbar-container'
       }
@@ -56,7 +56,7 @@
     width: 220px;
     background-color: #fff;
     transition: width 0.28s ease-out;
-    z-index: 9999;
+    z-index: 1999;
 
     .logo {
       height: 168px;

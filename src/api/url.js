@@ -12,5 +12,8 @@ export const HOME_URL = {
 
 export const FLIGHT_SEARCH = {
   MOUNTED: '/flightSearch/mounted',
-  SEARCH_NAME: '/flightSearch/searchName'
+  SEARCH_NAME: '/flightSearch/searchName',
+  GET_LIST: '/flightSearch/getList',
+  GET_LIST_SERVICE: '/flightSearch/getByService',
+  GET_FLIGHT: '/flightSearch/getFlight',
 }
